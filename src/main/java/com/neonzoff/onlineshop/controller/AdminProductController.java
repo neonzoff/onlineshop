@@ -20,8 +20,8 @@ import java.util.Optional;
  */
 @Controller
 @PreAuthorize(value = "hasAuthority('ADMIN')")
-@RequestMapping("/product")
-public class ProductController {
+@RequestMapping("/admin/product")
+public class AdminProductController {
     private final ProductRepository repository;
     private static final int COUNT_OF_RECORDS = 3;
     private static final int BUTTONS_TO_SHOW = 5;
@@ -30,7 +30,7 @@ public class ProductController {
     private static final int[] PAGE_SIZES = {5, 10, 15, 30, 50};
 
     @Autowired
-    public ProductController(ProductRepository repository) {
+    public AdminProductController(ProductRepository repository) {
         this.repository = repository;
     }
 

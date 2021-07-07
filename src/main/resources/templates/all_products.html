@@ -2,6 +2,7 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <title>Список товаров</title>
     <meta charset="utf-8">
     <!-- CSS INCLUDE -->
     <link rel="stylesheet"
@@ -37,8 +38,8 @@
     </div>
     <div class="panel-body">
     <ul class="nav nav-pills nav-justified">
-        <li class="active"><a th:href="@{/product}">Список товаров</a></li>
-        <li><a th:href="@{product/add}">Добавить товар</a></li>
+        <li class="active"><a th:href="@{/admin/product}">Список товаров</a></li>
+        <li><a th:href="@{add}">Добавить товар</a></li>
         <li><a th:href="@{/admin}">Панель управления</a></li>
     </ul>
 </div>
@@ -71,7 +72,7 @@
                 <td th:text="${product.isAvailable}">Доступность ...</td>
                 <td th:text="${product.count}">Кол-во ...</td>
                 <td th:text="${product.price}">Стоимость ...</td>
-                <td><a class="btn btn-primary" th:href="'product/edit/' + ${product.id}" role="button">Изменить</a>
+                <td><a class="btn btn-primary" th:href="'edit/' + ${product.id}" role="button">Изменить</a>
                     <a class="btn btn btn-danger" href="#" role="button">Удалить</a>
                 </td>
             </tr>
@@ -90,28 +91,28 @@
                 <ul class="pagination">
                     <li th:class="${productList.number == 0} ? disabled"><a
                             class="pageLink"
-                            th:href="@{/product/(pageSize=${selectedPageSize}, page=1)}">&laquo;</a>
+                            th:href="@{/admin/product/(pageSize=${selectedPageSize}, page=1)}">&laquo;</a>
                     </li>
                     <li th:class="${productList.number == 0} ? disabled"><a
                             class="pageLink"
-                            th:href="@{/product/(pageSize=${selectedPageSize}, page=${productList.number})}">&larr;</a>
+                            th:href="@{/admin/product/(pageSize=${selectedPageSize}, page=${productList.number})}">&larr;</a>
                     </li>
                     <li
                             th:class="${productList.number == (page - 1)} ? 'active pointer-disabled'"
                             th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
                         <a class="pageLink"
-                           th:href="@{/product/(pageSize=${selectedPageSize}, page=${page})}"
+                           th:href="@{/admin/product/(pageSize=${selectedPageSize}, page=${page})}"
                            th:text="${page}"></a>
                     </li>
                     <li
                             th:class="${productList.number + 1 == productList.totalPages} ? disabled">
                         <a class="pageLink"
-                           th:href="@{/product/(pageSize=${selectedPageSize}, page=${productList.number + 2})}">&rarr;</a>
+                           th:href="@{/admin/product/(pageSize=${selectedPageSize}, page=${productList.number + 2})}">&rarr;</a>
                     </li>
                     <li
                             th:class="${productList.number + 1 == productList.totalPages} ? disabled">
                         <a class="pageLink"
-                           th:href="@{/product/(pageSize=${selectedPageSize}, page=${productList.totalPages})}">&raquo;</a>
+                           th:href="@{/admin/product/(pageSize=${selectedPageSize}, page=${productList.totalPages})}">&raquo;</a>
                     </li>
                 </ul>
             </div>
@@ -138,7 +139,7 @@
 
     function changePageAndSize() {
         $('#pageSizeSelect').change(function (evt) {
-            window.location.replace("/product/?pageSize=" + this.value + "&page=1");
+            window.location.replace("/admin/product/?pageSize=" + this.value + "&page=1");
         });
     }
 
