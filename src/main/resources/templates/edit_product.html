@@ -1,0 +1,62 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Редактирование товара</title>
+
+</head>
+<body>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+<div class="mb-3">
+    <div class="container-fluid">
+        <h1>Изменить товар</h1>
+        <form>
+            <div><img th:src="${product.photoURL}" class="img-fluid" alt="Изображение товара" th:width="286" height="180"></div>
+            <div><label class="form-label"> Название<input class="form-control" type="text" name="name"
+                                                  th:value="${product.name}"/> </label></div>
+            <div><label class="form-label"> Описание<input class="form-control" type="text" name="description"
+                                                           th:value="${product.description}"/>
+            </label></div>
+            <!--
+                        <select class="form-select" aria-label="Default select example">
+                          <option selected>Категория</option>
+                          <option value="1">Первая</option>
+                          <option value="2">Вторая</option>
+                        </select>
+            -->
+            <div><label class="form-label"> Количество<input class="form-control" type="text" name="count"
+                                                             th:value="${product.count}"/></label>
+            </div>
+            <div><label class="form-label"> Стоимость<input class="form-control" type="text" name="price"
+                                                            th:value="${product.price}"/></label>
+            </div>
+            <div><label class="form-label"> Ссылка на фотографию товара<input class="form-control" type="text"
+                                                                              name="photoURL"
+                                                                              th:value="${product.photoURL}"/> </label>
+            </div>
+            <div><input type="submit" value="Изменить" class="btn btn-primary"/></div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
