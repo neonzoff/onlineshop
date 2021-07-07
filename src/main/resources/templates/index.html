@@ -1,6 +1,6 @@
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -110,7 +110,7 @@
                     <div class="card-body">
                         <h5 class="card-title" th:text="${product.name}"></h5>
                         <p class="card-text" th:text="${product.description}"></p>
-                        <a href="#" class="btn btn-primary">Открыть</a>
+                        <a th:href="'/product/' + ${product.id}" class="btn btn-primary">Открыть</a>
                     </div>
                 </div>
             </div>
