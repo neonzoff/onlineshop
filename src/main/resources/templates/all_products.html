@@ -90,28 +90,28 @@
                 <ul class="pagination">
                     <li th:class="${productList.number == 0} ? disabled"><a
                             class="pageLink"
-                            th:href="@{/(pageSize=${selectedPageSize}, page=1)}">&laquo;</a>
+                            th:href="@{/product/(pageSize=${selectedPageSize}, page=1)}">&laquo;</a>
                     </li>
                     <li th:class="${productList.number == 0} ? disabled"><a
                             class="pageLink"
-                            th:href="@{/(pageSize=${selectedPageSize}, page=${productList.number})}">&larr;</a>
+                            th:href="@{/product/(pageSize=${selectedPageSize}, page=${productList.number})}">&larr;</a>
                     </li>
                     <li
                             th:class="${productList.number == (page - 1)} ? 'active pointer-disabled'"
                             th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
                         <a class="pageLink"
-                           th:href="@{/(pageSize=${selectedPageSize}, page=${page})}"
+                           th:href="@{/product/(pageSize=${selectedPageSize}, page=${page})}"
                            th:text="${page}"></a>
                     </li>
                     <li
                             th:class="${productList.number + 1 == productList.totalPages} ? disabled">
                         <a class="pageLink"
-                           th:href="@{/(pageSize=${selectedPageSize}, page=${productList.number + 2})}">&rarr;</a>
+                           th:href="@{/product/(pageSize=${selectedPageSize}, page=${productList.number + 2})}">&rarr;</a>
                     </li>
                     <li
                             th:class="${productList.number + 1 == productList.totalPages} ? disabled">
                         <a class="pageLink"
-                           th:href="@{/(pageSize=${selectedPageSize}, page=${productList.totalPages})}">&raquo;</a>
+                           th:href="@{/product/(pageSize=${selectedPageSize}, page=${productList.totalPages})}">&raquo;</a>
                     </li>
                 </ul>
             </div>
@@ -138,7 +138,7 @@
 
     function changePageAndSize() {
         $('#pageSizeSelect').change(function (evt) {
-            window.location.replace("/product/all/?pageSize=" + this.value + "&page=1");
+            window.location.replace("/product/?pageSize=" + this.value + "&page=1");
         });
     }
 
