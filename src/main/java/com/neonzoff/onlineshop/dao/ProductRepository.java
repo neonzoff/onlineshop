@@ -4,7 +4,6 @@ import com.neonzoff.onlineshop.model.Product;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author Tseplyaev Dmitry

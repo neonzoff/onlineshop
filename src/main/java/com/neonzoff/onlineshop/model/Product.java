@@ -21,13 +21,15 @@ public class Product {
 
     @Column(name = "name_product")
     private String name;
+
     @Column(length = 2048)
     private String description;
+
     private int count;
     private int price;
     private String photoURL;
     private boolean isAvailable;
 
-   @ManyToMany(mappedBy = "products")
+    @ManyToMany(mappedBy = "products")
     private List<OrderModel> orders = new ArrayList<>();
 }

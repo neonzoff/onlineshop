@@ -39,7 +39,8 @@
 <div class="mb-3">
     <div class="container-fluid">
         <h1>Зарегистрировать аккаунт</h1>
-        <form th:action="@{/registration}" method="post" name="userForm">
+        <form th:action="@{/registration}" method="post" name="userForm" id="userForm">
+            <p th:text="${errorMessage}"></p>
             <div><label class="form-label"> Фамилия<input class="form-control" type="text" name="surname"/> </label>
             </div>
             <div><label class="form-label"> Имя<input class="form-control" type="text" name="name"/> </label></div>

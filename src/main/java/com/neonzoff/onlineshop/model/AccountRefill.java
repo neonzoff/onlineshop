@@ -19,7 +19,6 @@ public class AccountRefill {
     private int id;
 
     private Date date;
-
     private int money;
 
     @ManyToOne

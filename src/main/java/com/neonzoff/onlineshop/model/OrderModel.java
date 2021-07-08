@@ -30,15 +30,6 @@ public class OrderModel {
     @JoinColumn(name = "status_of_order")
     private StatusOfOrder statusOfOrder;
 
-/*
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_order")
-    private List<Product> products;
-*/
-
-//    @ManyToMany(mappedBy = "orders")
-//    private List<Product> products;
-
     @ManyToMany
     @JoinTable(
             joinColumns = @JoinColumn(name = "product_id"),

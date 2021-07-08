@@ -10,9 +10,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 /**
@@ -73,17 +76,28 @@ public class AdminProductController {
     }
 
     @PostMapping("/add")
-    public String addProduct(@ModelAttribute("productForm") ProductForm productForm) {
-        Product product = new Product();
-        product.setCount(productForm.getCount());
-        product.setName(productForm.getName());
-        product.setDescription(productForm.getDescription());
-        product.setPhotoURL(productForm.getPhotoURL());
-        product.setPrice(productForm.getPrice());
+    public String addProduct(@Valid @ModelAttribute("productForm") ProductForm productForm, BindingResult bindingResult,
+                             Model model
+    ) {
+        if (bindingResult.hasErrors()) {
+            StringBuilder errorMessage = new StringBuilder();
+            for (ObjectError error : bindingResult.getAllErrors()) {
+                errorMessage.append(error.getDefaultMessage()).append('\n');
+            }
+            model.addAttribute("errorMessage", errorMessage);
+            return "add_product";
+        } else {
+            Product product = new Product();
+            product.setCount(productForm.getCount());
+            product.setName(productForm.getName());
+            product.setDescription(productForm.getDescription());
+            product.setPhotoURL(productForm.getPhotoURL());
+            product.setPrice(productForm.getPrice());
 //        product.setAvailable(productForm.isAvailable());  //todo:вроде как не работает
-        product.setAvailable(true); //временно жестко задаем доступность
-        repository.save(product);
-        return "redirect:/admin/product";
+            product.setAvailable(true); //временно жестко задаем доступность
+            repository.save(product);
+            return "redirect:/admin/product";
+        }
     }
 
     @GetMapping("/edit/{id_product}")

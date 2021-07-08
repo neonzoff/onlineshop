@@ -1,14 +1,12 @@
 package com.neonzoff.onlineshop.service;
 
 import com.neonzoff.onlineshop.dao.UserRepository;
-import com.neonzoff.onlineshop.model.Role;
 import com.neonzoff.onlineshop.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
