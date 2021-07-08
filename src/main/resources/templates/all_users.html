@@ -61,7 +61,7 @@
             <td th:text="${user.surname} + ' ' + ${user.name} + ' ' + ${user.middleName}">...</td>
             <td th:text="${user.address}">...</td>
             <td th:text="${user.phoneNumber}">...</td>
-            <td th:text="${user.balance}">...</td>
+            <td th:text="${user.privateAccount.balance}">...</td>
             <td><a class="btn btn-primary" th:href="'user/edit/' + ${user.id}" role="button">Изменить</a></td>
         </tr>
         </tbody>

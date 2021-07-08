@@ -7,7 +7,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -29,11 +28,13 @@ public class UserModel implements UserDetails {
     private String middleName;
     private String address;
     private String phoneNumber;
-    private int balance;
 
     @Enumerated(value = EnumType.STRING)
     @JoinColumn(name = "role")
     private Role role;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private PrivateAccount privateAccount;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

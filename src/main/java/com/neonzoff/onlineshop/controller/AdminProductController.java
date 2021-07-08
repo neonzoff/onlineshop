@@ -80,9 +80,10 @@ public class AdminProductController {
         product.setDescription(productForm.getDescription());
         product.setPhotoURL(productForm.getPhotoURL());
         product.setPrice(productForm.getPrice());
-        product.setAvailable(productForm.isAvailable());
+//        product.setAvailable(productForm.isAvailable());  //todo:вроде как не работает
+        product.setAvailable(true); //временно жестко задаем доступность
         repository.save(product);
-        return "redirect:/product";
+        return "redirect:/admin/product";
     }
 
     @GetMapping("/edit/{id_product}")

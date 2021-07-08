@@ -1,6 +1,7 @@
 package com.neonzoff.onlineshop.controller;
 
 import com.neonzoff.onlineshop.dto.UserForm;
+import com.neonzoff.onlineshop.model.PrivateAccount;
 import com.neonzoff.onlineshop.model.Role;
 import com.neonzoff.onlineshop.model.UserModel;
 import com.neonzoff.onlineshop.service.UserService;
@@ -51,8 +52,10 @@ public class LoginController {
         user.setMiddleName(userForm.getMiddlename());
         user.setAddress(userForm.getAddress());
         user.setPhoneNumber(userForm.getPhoneNumber());
-        user.setBalance(0);
         user.setRole(Role.USER);
+        PrivateAccount privateAccount = new PrivateAccount();
+        privateAccount.setUser(user);
+        user.setPrivateAccount(privateAccount);
         service.createUser(user);
         return "redirect:/login";
     }

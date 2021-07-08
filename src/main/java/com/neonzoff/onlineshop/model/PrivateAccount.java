@@ -19,7 +19,7 @@ public class PrivateAccount {
 
     private int balance;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_user")
     private UserModel user;
 }

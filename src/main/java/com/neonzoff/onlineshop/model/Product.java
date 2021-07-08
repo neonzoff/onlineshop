@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Tseplyaev Dmitry
@@ -26,4 +28,6 @@ public class Product {
     private String photoURL;
     private boolean isAvailable;
 
+   @ManyToMany(mappedBy = "products")
+    private List<OrderModel> orders = new ArrayList<>();
 }

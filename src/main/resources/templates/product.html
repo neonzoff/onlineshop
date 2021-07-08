@@ -48,10 +48,17 @@
     </div>
     <div class="card-footer text-muted">
         <h5 th:text="Заказать"></h5>
-        <div><label class="form-label">Количество<input class="form-control" type="number" name="count"
-                                                     step="1" th:min="1" th:max="${product.count}"/></label></div>
-        <a href="#" class="btn btn-primary">Добавить в заказ</a>
+        <form th:action="@{'/product/' + ${product.id}}" method="post" name="addToOrderForm">
+            <div><label hidden class="form-label">Стоимость<input class="form-control" type="number" name="idProduct"
+                                                                  th:value="${product.id}"/></label></div>
+            <div><label hidden class="form-label">Стоимость<input class="form-control" type="number" name="price"
+                                                                  th:value="${product.price}"/></label></div>
+
+            <div><label hidden class="form-label">Количество<input class="form-control" type="number" name="count"
+                                                                   th:value="1"/></label></div>
+            <div><input type="submit" value="Добавить в заказ" class="btn btn-primary"/></div>
+        </form>
     </div>
-</div>
+
 </body>
 </html>

@@ -66,7 +66,6 @@ public class AdminController {
         return "user/{id_user}";
     }
 
-
     @GetMapping("/orders")
     public String getOrders() {
         return "orders";

@@ -1,6 +1,8 @@
 package com.neonzoff.onlineshop.config;
 
+import com.neonzoff.onlineshop.model.PrivateAccount;
 import com.neonzoff.onlineshop.model.Role;
+import com.neonzoff.onlineshop.model.UserModel;
 import com.neonzoff.onlineshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -50,6 +52,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .permitAll()
                 .logoutSuccessUrl("/login");
+
+        if (userService.allUsers().isEmpty()) {
+            addUserInDB("admin", "admin", Role.ADMIN,
+                    "Админов", "Админ", "Админович",
+                    "JVM", 1_000_000, "89992223344",
+                    new PrivateAccount()
+            );
+            addUserInDB("manager", "manager", Role.MANAGER,
+                    "Менеджеров", "Менеджер", "Менеджерович",
+                    "JVM", 1_000_000, "89992223344",
+                    new PrivateAccount()
+            );
+            addUserInDB("user", "user", Role.USER,
+                    "Тестовый", "Михаил", "Поликарпович",
+                    "JVM", 1_000_000, "89992223344",
+                    new PrivateAccount()
+            );
+        }
     }
 
     @Bean
@@ -89,4 +109,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new InMemoryUserDetailsManager(admin, manager, user);
     }
 */
+
+    private void addUserInDB(String username, String password, Role role,
+                             String surname, String name, String middleName,
+                             String address, int balance, String phoneNumber,
+                             PrivateAccount privateAccount
+    ) {
+        UserModel user = new UserModel();
+        privateAccount.setUser(user);
+        privateAccount.setBalance(balance);
+        user.setPrivateAccount(privateAccount);
+        user.setAddress(address);
+        user.setRole(role);
+        user.setPhoneNumber(phoneNumber);
+        user.setPassword(password);
+        user.setSurname(surname);
+        user.setName(name);
+        user.setMiddleName(middleName);
+        user.setUsername(username);
+        userService.createUser(user);
+    }
+
 }
