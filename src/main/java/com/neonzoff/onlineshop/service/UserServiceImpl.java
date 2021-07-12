@@ -28,7 +28,8 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(BCryptPasswordEncoder bCryptPasswordEncoder, UserRepository repository) {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.repository = repository;
-        users = repository.findAll();
+//        users = repository.findAll();
+        users = allUsers();
     }
 
     @Override

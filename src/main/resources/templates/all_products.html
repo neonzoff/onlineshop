@@ -72,7 +72,7 @@
                 <td th:text="${product.isAvailable}">Доступность ...</td>
                 <td th:text="${product.count}">Кол-во ...</td>
                 <td th:text="${product.price}">Стоимость ...</td>
-                <td><a class="btn btn-primary" th:href="'edit/' + ${product.id}" role="button">Изменить</a>
+                <td><a class="btn btn-primary" th:href="'product/edit/' + ${product.id}" role="button">Изменить</a>
                     <a class="btn btn btn-danger" href="#" role="button">Удалить</a>
                 </td>
             </tr>

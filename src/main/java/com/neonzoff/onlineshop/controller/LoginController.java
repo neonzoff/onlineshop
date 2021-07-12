@@ -30,13 +30,6 @@ public class LoginController {
         this.service = service;
     }
 
-    @GetMapping("/afterLogin")
-    public String afterLogin(HttpServletRequest request) {
-        if (request.isUserInRole(Role.ADMIN.name())) {
-            return "redirect:/admin";
-        }
-        return "redirect:/";
-    }
 
     @GetMapping("/registration")
     public String getRegistration(Model model) {
