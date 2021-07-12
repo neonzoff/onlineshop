@@ -44,11 +44,13 @@ class UserServiceImplTest {
 
     @Test
     void createExistingUser() {
+        final String USERNAME = "dmitry";
+
         UserModel userModel = new UserModel();
-        userModel.setUsername("dmitry");
+        userModel.setUsername(USERNAME);
         Mockito.doReturn(Optional.of(new UserModel()))
                 .when(userRepository)
-                .findByUsername("dmitry");
+                .findByUsername(USERNAME);
 
         boolean isUserCreated = userService.createUser(userModel);
 
@@ -67,13 +69,15 @@ class UserServiceImplTest {
 
     @Test
     void loadUserByUsername() {
+        final String USERNAME = "dmitry";
+
         Mockito.doReturn(Optional.of(new UserModel()))
                 .when(userRepository)
-                .findByUsername("dmitry");
-        UserModel userModel = userRepository.findByUsername("dmitry").get();
+                .findByUsername(USERNAME);
+        UserModel userModel = userRepository.findByUsername(USERNAME).get();
 
         assertNotNull(userModel);
 
-        Mockito.verify(userRepository, Mockito.times(1)).findByUsername("dmitry");
+        Mockito.verify(userRepository, Mockito.times(1)).findByUsername(USERNAME);
     }
 }
