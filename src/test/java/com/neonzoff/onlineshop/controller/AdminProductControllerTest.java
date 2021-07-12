@@ -54,7 +54,9 @@ class AdminProductControllerTest {
 
     @Test
     void editProduct() throws Exception {
-        this.mockMvc.perform(get("/admin/product/edit/" + productRepository.findAll().get(0).getId()))
+        final int ID_PRODUCT = productRepository.findAll().get(0).getId();
+
+        this.mockMvc.perform(get("/admin/product/edit/" + ID_PRODUCT))
                 .andDo(print())
                 .andExpect(content().string(containsString(productRepository.findAll().get(0).getName())))
                 .andExpect(content().string(containsString(productRepository.findAll().get(0).getDescription())))

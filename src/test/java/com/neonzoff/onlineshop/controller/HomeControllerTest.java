@@ -49,7 +49,9 @@ class HomeControllerTest {
 
     @Test
     void getProduct() throws Exception {
-        this.mockMvc.perform(get("/product/60"))
+        final String ID_PRODUCT = "60";
+
+        this.mockMvc.perform(get("/product/" + ID_PRODUCT))
                 .andDo(print())
                 .andExpect(content().string(containsString(productRepository.findAll().get(0).getName())));
     }
