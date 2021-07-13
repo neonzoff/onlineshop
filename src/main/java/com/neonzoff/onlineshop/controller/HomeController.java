@@ -8,15 +8,18 @@ import com.neonzoff.onlineshop.model.OrderModel;
 import com.neonzoff.onlineshop.model.Product;
 import com.neonzoff.onlineshop.model.StatusOfOrder;
 import com.neonzoff.onlineshop.model.UserModel;
+import com.neonzoff.onlineshop.service.ProductsInOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * @author Tseplyaev Dmitry
@@ -24,6 +27,10 @@ import java.util.Set;
 @Controller
 @RequestMapping("/")
 public class HomeController {
+
+    @Autowired
+    private ProductsInOrderService productsInOrderService;
+
     @Autowired
     private ProductRepository productRepository;
 
@@ -85,6 +92,42 @@ public class HomeController {
         ModelAndView modelAndView = new ModelAndView("profile");
         UserModel user = userRepository.findByUsername(request.getUserPrincipal().getName()).get();
         modelAndView.addObject("user", user);
+        List<OrderModel> orderList = orderRepository.findByUser(user).get();
+        modelAndView.addObject("orderList", orderList);
+
+        return modelAndView;
+    }
+
+
+    @GetMapping("/order/{id_order}")
+    public ModelAndView getOrder(@PathVariable int id_order,
+                                 @RequestParam("page") Optional<Integer> page,
+                                 @RequestParam("size") Optional<Integer> size
+    ) {
+        ModelAndView modelAndView = new ModelAndView("order");
+        OrderModel order = orderRepository.getById(id_order);
+
+
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(5);
+
+        Page<Product> productPage = productsInOrderService.findPaginated(
+                PageRequest.of(currentPage - 1, pageSize),
+                new ArrayList<>(order.getProducts())
+        );
+
+        modelAndView.addObject("productPage", productPage);
+
+        int totalPages = productPage.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            modelAndView.addObject("pageNumbers", pageNumbers);
+        }
+
+        modelAndView.addObject("order", order);
+
         return modelAndView;
     }
 

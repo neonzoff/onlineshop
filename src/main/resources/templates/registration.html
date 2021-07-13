@@ -28,6 +28,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-show-password/1.0.3/bootstrap-show-password.min.js"></script>
 <!--END TEMPLATE-->
 <div th:if="${param.error}">
     Неправильные имя пользователя или пароль.
@@ -39,7 +41,8 @@
 <div class="mb-3">
     <div class="container-fluid">
         <h1>Зарегистрировать аккаунт</h1>
-        <form th:action="@{/registration}" method="post" name="userForm" id="userForm">
+        <form th:action="@{/registration}" method="post" name="userForm" id="userForm"
+              oninput='passwordConfirm.setCustomValidity(passwordConfirm.value != password.value ? "Пароли не совпадают." : "")'>
             <p th:text="${errorMessage}"></p>
             <div><label class="form-label"> Фамилия<input class="form-control" type="text" name="surname"/> </label>
             </div>
@@ -48,7 +51,11 @@
             </div>
             <div><label class="form-label"> Email<input class="form-control" type="text" name="username"/> </label>
             </div>
-            <div><label class="form-label"> Пароль<input class="form-control" type="password" name="password"/> </label>
+            <div><label class="form-label"> Пароль<input class="form-control" type="password" required name="password"/>
+            </label>
+            </div>
+            <div><label class="form-label"> Подтверждение пароля<input class="form-control" type="password"
+                                                                       name="passwordConfirm"/> </label>
             </div>
             <div><label class="form-label"> Номер телефона<input class="form-control" type="text" name="phoneNumber"/>
             </label></div>

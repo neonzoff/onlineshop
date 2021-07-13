@@ -70,13 +70,17 @@ class UserServiceImplTest {
     @Test
     void loadUserByUsername() {
         final String USERNAME = "dmitry";
+        UserModel user = new UserModel();
+        user.setUsername("Dmitry");
 
-        Mockito.doReturn(Optional.of(new UserModel()))
+        Mockito.doReturn(Optional.of(user))
                 .when(userRepository)
                 .findByUsername(USERNAME);
-        UserModel userModel = userRepository.findByUsername(USERNAME).get();
+        String username = userService.loadUserByUsername(USERNAME).getUsername();
 
-        assertNotNull(userModel);
+
+        assertNotNull(username);
+        assertEquals("Dmitry", username);
 
         Mockito.verify(userRepository, Mockito.times(1)).findByUsername(USERNAME);
     }

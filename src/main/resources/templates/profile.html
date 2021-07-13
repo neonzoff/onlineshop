@@ -34,17 +34,17 @@
         <!--        <h5 th:text="'Здравствуйте, ' + ${user.surname} + ' ' + ${user.name} + ' ' + ${user.middleName}"></h5>-->
     </div>
     <div class="card-body">
-        <h5 class="card-title" th:text="'Роль: ' + ${user.role.name()}" ></h5>
+        <h5 class="card-title" th:text="'Роль: ' + ${user.role.name()}"></h5>
         <div><label class="form-label">Фамилия<input class="form-control" type="text" name="name"
                                                      th:value="${user.surname}"/></label></div>
         <div><label class="form-label">Имя<input class="form-control" type="text" name="name"
-                                                     th:value="${user.name}"/></label></div>
+                                                 th:value="${user.name}"/></label></div>
         <div><label class="form-label">Отчество<input class="form-control" type="text" name="name"
-                                                     th:value="${user.middleName}"/></label></div>
+                                                      th:value="${user.middleName}"/></label></div>
         <div><label class="form-label">Адрес<input class="form-control" type="text" name="name"
-                                                     th:value="${user.address}"/></label></div>
+                                                   th:value="${user.address}"/></label></div>
         <div><label class="form-label">Баланс<input class="form-control" type="text" name="name"
-                                                     th:value="${user.privateAccount.balance}"/></label></div>
+                                                    th:value="${user.privateAccount.balance}"/></label></div>
         <!--        <p class="card-text">С вспомогательным текстом ниже в качестве естественного перехода к дополнительному контенту.</p>-->
         <!--        <p class="card-text">С вспомогательным текстом ниже в качестве естественного перехода к дополнительному контенту.</p>-->
         <!--        <p class="card-text">С вспомогательным текстом ниже в качестве естественного перехода к дополнительному контенту.</p>-->
@@ -52,7 +52,29 @@
         <a href="#" class="btn btn-success">Пополнить счет</a>
     </div>
     <div class="card-footer text-muted">
-        Добавить что-нибудь
+        Заказы
+        <div class="container-fluid">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <!--                <th th:text="#{order.id}" />-->
+                    <!--                <th th:text="#{.name}" />-->
+                    <th scope="col">ID</th>
+                    <th scope="col">Количество товаров</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="order, iStat : ${orderList}">
+                    <!--                th:style="${iStat.odd}? 'font-weight: bold;'"-->
+                    <!--                th:alt-title="${iStat.even}? 'even' : 'odd'">-->
+                    <th scope="row" th:text="${order.id}"/>
+                    <td th:text="${order.products.size()}"/>
+                    <td><a class="btn btn-primary" th:href="'order/' + ${order.id}" role="button">Перейти</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 </body>
