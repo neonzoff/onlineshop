@@ -64,7 +64,7 @@ class UserServiceImplTest {
     @Test
     void allUsers() {
         List<UserModel> users = userRepository.findAll();
-        Mockito.verify(userRepository, Mockito.times(3)).findAll();
+        Mockito.verify(userRepository, Mockito.times(1)).findAll(); //если все тесты в классе запустить - 1 раз, если отдельно этот то 3 раза.
     }
 
     @Test

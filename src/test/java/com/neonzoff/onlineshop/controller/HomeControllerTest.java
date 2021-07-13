@@ -1,6 +1,7 @@
 package com.neonzoff.onlineshop.controller;
 
 import com.neonzoff.onlineshop.dao.ProductRepository;
+import com.neonzoff.onlineshop.model.Product;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,11 +50,12 @@ class HomeControllerTest {
 
     @Test
     void getProduct() throws Exception {
-        final String ID_PRODUCT = "60";
+        final Product product = productRepository.findAll().get(0);
+        final String ID_PRODUCT = String.valueOf(product.getId());
 
         this.mockMvc.perform(get("/product/" + ID_PRODUCT))
                 .andDo(print())
-                .andExpect(content().string(containsString(productRepository.findAll().get(0).getName())));
+                .andExpect(content().string(containsString(product.getName())));
     }
 
 
